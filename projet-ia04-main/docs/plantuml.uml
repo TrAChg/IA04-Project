@@ -1,0 +1,53 @@
+@startuml
+
+' Define Country class
+class Country {
+    - id : int
+    - name : string
+    - neighbors : map<int, bool>
+    - current_popu : int
+    - max_popu : int
+    - res_size : int
+    - regen_rate : int
+    - border : bool  ' TRUE = OPEN BORDER, FALSE = CLOSED BORDER
+    - total_deaths : int
+    - MigrationQueue : chan MigrationRequest  ' Channel for immigration requests
+    - PopulationList : []*Group_population
+    - water border : map<int, bool>
+    - density threshold : int
+    - Infrastructure Index : int
+    + Carrying_capacity(neihgbors, water border, density threshold, infrastructure index) : ressource
+    + Total Impact(Net impact'of each citizen') : ressource
+    + Border Cost(neighbors, water border) : ressource
+    + Choice Border(Total Impact, Border Cost, Carrying_capacity) : bool 
+    + Net Impact(Contributions, Consumptions) : ressource
+
+}
+
+' Define Group_population class
+class Group_population {
+    - id : int
+    - size_X : int
+    - size_Y : int
+    - total_cells : int
+    - pos : Point
+    - current_country : *Country
+    - is_resource_deficient : bool  ' Resource consumption per group equals its number of cells
+    - is_flooded : bool
+    - StatusChan : chan bool
+    - behavior : BehaviorType
+    - Own_Ressource : int/ ressource
+    + Moving Cost(Country Id, pos) : ressource
+    + Is water close ?() : bool
+    + Moving ?(Is water close, Moving Cost, Own_Ressource) : bool
+}
+
+entity Ressource{
+    ressource : int
+}
+
+' Relationships
+Country "1" o-- "*" Group_population : has
+Group_population "*" --> "1" Country : belongs_to
+
+@enduml

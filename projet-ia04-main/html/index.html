@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Africa Sim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand text-primary fw-bold" href="index.html">Africa Sim</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="history.html">Histories</a></li>
+                <li class="nav-item"><a class="nav-link" href="countries.html">Countries Data</a></li>
+            </ul>
+            <span class="navbar-text text-white fw-bold me-3" id="globalStatus">
+                OFFLINE
+            </span>
+            <span class="badge bg-secondary fs-6" id="tourDisplay">Tour: 0</span>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h3 class="mb-3 text-secondary">Status( Get from /status in api.go ) </h3>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="bi bi-people-fill"></i> Total Population</h5>
+                    <h2 class="display-4 fw-bold" id="kpi-pop">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="bi bi-heart-break-fill"></i> Total Deaths</h5>
+                    <h2 class="display-4 fw-bold" id="kpi-death">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="bi bi-tree-fill"></i> Land Remaining</h5>
+                    <h2 class="display-4 fw-bold" id="kpi-land">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-secondary text-white">Mission Control</div>
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <p class="text-muted">Manage simulation state.</p>
+                    <button id="toggleBtn" class="btn btn-lg btn-outline-success w-100 py-3 fw-bold">
+                        <i class="bi bi-play-circle"></i> Start Simulation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-secondary text-white d-flex justify-content-between">
+                    <span><i class="bi bi-terminal"></i> Live Event Logs</span>
+                </div>
+                <div id="logBox" class="card-body bg-dark text-success font-monospace" style="height: 300px; overflow-y: auto; font-size: 0.85rem;">
+                    Waiting for events...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/sea.js"></script>
+</body>
+</html>
